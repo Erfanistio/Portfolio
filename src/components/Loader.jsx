@@ -26,7 +26,6 @@ export default function Loader({ onComplete }) {
   const secondDigitRef = useRef(null);
   const thirdDigitRef = useRef(null);
   const percentageRef = useRef(null);
-  const labelRef = useRef(null);
 
   useEffect(() => {
 
@@ -50,14 +49,12 @@ export default function Loader({ onComplete }) {
       gsap.set(firstDigitRef.current, { yPercent: 100 });
       gsap.set([secondDigitRef.current, thirdDigitRef.current], { yPercent: 10 });
       gsap.set(percentageRef.current, { yPercent: 100 });
-      gsap.set(labelRef.current, { autoAlpha: 0, y: -12 });
 
       if (reducedMotion) {
         gsap.set(progressFillRef.current, { scaleY: 1 });
         gsap.set(firstDigitRef.current, { yPercent: 0 });
         gsap.set([secondDigitRef.current, thirdDigitRef.current], { yPercent: -90 });
         gsap.set(percentageRef.current, { yPercent: 0 });
-        gsap.set(labelRef.current, { autoAlpha: 1, y: 0 });
 
         gsap.timeline({ onComplete: finish })
           .to({}, { duration: 0.35 })
@@ -73,7 +70,6 @@ export default function Loader({ onComplete }) {
         defaults: { duration: 0.82, ease: "expo.inOut" },
         onComplete: finish,
       })
-        .to(labelRef.current, { autoAlpha: 1, y: 0, duration: 0.5 })
         .to(progressFillRef.current, { scaleY: firstStop / 100 }, 0)
         .to(percentageRef.current, { yPercent: 0 }, 0)
         .to(secondDigitRef.current, { yPercent: (firstTens - 1) * -10 }, 0)
@@ -101,7 +97,6 @@ export default function Loader({ onComplete }) {
           "<",
         )
         .to(percentageRef.current, { yPercent: -100, duration: 0.72 }, "<")
-        .to(labelRef.current, { autoAlpha: 0, y: -14, duration: 0.45 }, "<")
         .to(numbersRef.current, { autoAlpha: 0, duration: 0.18 })
         .to(loaderRef.current, {
           yPercent: -100,
@@ -120,15 +115,10 @@ export default function Loader({ onComplete }) {
       ref={loaderRef}
       role="status"
       aria-live="polite"
-      aria-label="Loading Erfan Akrami portfolio"
+      aria-label="Loading"
       className="odometer-loader fixed inset-0 z-[99999] overflow-hidden"
     >
-      <span className="sr-only">Loading portfolio</span>
-
-      <div ref={labelRef} className="odometer-loader-label">
-        <span>Loading portfolio</span>
-        <span>Erfan Akrami / 2026</span>
-      </div>
+      <span className="sr-only">Loading</span>
 
       <span ref={progressTrackRef} className="odometer-progress" aria-hidden="true">
         <span ref={progressFillRef} className="odometer-progress-fill" />

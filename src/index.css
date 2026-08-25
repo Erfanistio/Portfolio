@@ -9,23 +9,6 @@
   isolation: isolate;
 }
 
-.odometer-loader-label {
-  position: absolute;
-  z-index: 2;
-  top: clamp(1.25rem, 2.5vw, 2.75rem);
-  right: clamp(1.25rem, 2.5vw, 2.75rem);
-  left: clamp(2.5rem, 5vw, 6rem);
-  display: flex;
-  justify-content: space-between;
-  gap: 1.5rem;
-  font-family: Inter, sans-serif;
-  font-size: clamp(0.58rem, 0.7vw, 0.72rem);
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.56);
-}
-
 .odometer-progress {
   position: absolute;
   z-index: 3;
@@ -113,18 +96,6 @@
   will-change: transform;
 }
 @media (max-width: 640px) {
-  .odometer-loader-label {
-    left: 2.25rem;
-  }
-
-  .odometer-loader-label span:first-child {
-    display: none;
-  }
-
-  .odometer-loader-label {
-    justify-content: flex-end;
-  }
-
   .odometer-numbers {
     bottom: 0.12em;
     left: 2rem;
@@ -205,20 +176,11 @@
 }
 
 .profile-chooser-panel {
-  --gradient-x: 50%;
-  --gradient-y: 50%;
   position: relative;
   isolation: isolate;
   overflow: hidden;
   scrollbar-width: none;
-  background:
-    radial-gradient(
-      circle at var(--gradient-x) var(--gradient-y),
-      rgba(255, 255, 255, 0.16) 0,
-      rgba(255, 255, 255, 0.045) 18%,
-      transparent 38%
-    ),
-    linear-gradient(105deg, #121212 0%, #262626 44%, #7b7b7b 100%);
+  background: linear-gradient(105deg, #121212 0%, #262626 44%, #7b7b7b 100%);
 }
 
 .profile-chooser,

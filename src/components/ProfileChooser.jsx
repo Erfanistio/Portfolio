@@ -79,21 +79,6 @@ export default function ProfileChooser({ onProfileChange, onComplete }) {
     };
   }, []);
 
-  const handlePointerMove = (event) => {
-    if (reducedMotionRef.current || !panelRef.current) return;
-
-    const bounds = panelRef.current.getBoundingClientRect();
-    const x = ((event.clientX - bounds.left) / bounds.width) * 100;
-    const y = ((event.clientY - bounds.top) / bounds.height) * 100;
-    panelRef.current.style.setProperty("--gradient-x", `${x}%`);
-    panelRef.current.style.setProperty("--gradient-y", `${y}%`);
-  };
-
-  const handlePointerLeave = () => {
-    panelRef.current?.style.setProperty("--gradient-x", "50%");
-    panelRef.current?.style.setProperty("--gradient-y", "50%");
-  };
-
   const handleSelect = (profileId) => {
     if (selectionRef.current) return;
     selectionRef.current = profileId;
@@ -143,8 +128,6 @@ export default function ProfileChooser({ onProfileChange, onComplete }) {
       <div
         ref={panelRef}
         className="profile-chooser-panel flex h-full w-full items-center justify-center overflow-hidden px-4 py-6 sm:px-8 lg:px-[5vw]"
-        onPointerMove={handlePointerMove}
-        onPointerLeave={handlePointerLeave}
       >
         <div
           data-active-profile={activeProfile || undefined}
