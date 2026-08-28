@@ -14,7 +14,7 @@ const socialLinks = [
 
 export default function Footer({ content }) {
   return (
-    <footer className="w-full bg-black px-2.5 pb-10 font-inter">
+    <footer className="w-full bg-black px-2 pb-10 font-inter">
       <div data-footer-shell className="grid min-h-[360px] w-full grid-cols-[1.5fr_0.7fr_0.8fr] items-start gap-[70px] rounded-[120px] bg-[#171717] px-[70px] py-[65px] text-white max-lg:grid-cols-1 max-lg:gap-10 max-lg:rounded-[70px] max-lg:px-10 max-lg:py-[55px] max-md:rounded-[45px] max-md:px-7 max-md:py-10">
         <div className="max-w-[560px]">
           <span className="mb-[18px] block font-inter text-[22px] text-white">STAY CONNECTED.</span>

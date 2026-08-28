@@ -2,7 +2,7 @@ export default function Contact({ content }) {
   return (
     <section
       id="contact"
-      className="relative w-full bg-black px-5 pb-16 max-md:px-3 max-md:pb-10"
+      className="relative w-full bg-black px-2 pb-16 max-md:pb-10"
     >
       <div className="relative h-[740px] w-full overflow-hidden rounded-[100px] max-lg:h-auto max-lg:min-h-[760px] max-md:rounded-[52px]">
         <img

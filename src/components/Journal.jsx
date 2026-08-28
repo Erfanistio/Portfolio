@@ -21,8 +21,8 @@
 
 export default function Journal({ content }) {
   return (
-    <section id="journal" className="w-full overflow-hidden bg-black px-[30px] pb-[90px] max-md:px-4">
-      <div data-journal-shell className="mx-auto min-h-[650px] w-[95%] max-w-[1750px] rounded-[115px] bg-[#171717] px-[75px] py-[70px] pb-[85px] text-white max-lg:rounded-[70px] max-lg:px-[35px] max-lg:py-[55px] max-lg:pb-[70px]">
+    <section id="journal" className="w-full overflow-hidden bg-black px-2 pb-[90px]">
+      <div data-journal-shell className="mx-auto min-h-[650px] w-full rounded-[115px] bg-[#171717] px-[75px] py-[70px] pb-[85px] text-white max-lg:rounded-[70px] max-lg:px-[35px] max-lg:py-[55px] max-lg:pb-[70px]">
         <div className="mb-[55px] flex items-start justify-between gap-10 max-lg:flex-col">
           <h2 className="text-[82px] leading-[0.9] text-white max-md:text-[64px]">Journal</h2>
           <p className="max-w-[420px] text-left font-inter text-xs font-light uppercase leading-[1.4] text-white/60">
