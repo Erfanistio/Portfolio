@@ -1,0 +1,9 @@
+.admin-shell { min-width: 320px; }
+.admin-orb { filter: blur(2px); mix-blend-mode: screen; }
+.admin-input, .admin-light-input { width: 100%; height: 3.5rem; border-radius: 1rem; padding: 0 1rem; font: inherit; outline: none; transition: border-color 180ms ease, background-color 180ms ease; }
+.admin-input { border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.045); color: #fff; }
+.admin-input::placeholder { color: rgba(255,255,255,.25); }
+.admin-input:focus { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.07); }
+.admin-light-input { border: 1px solid rgba(0,0,0,.12); background: #f6f5f1; color: #171713; }
+.admin-light-input::placeholder { color: rgba(0,0,0,.3); }
+.admin-light-input:focus { border-color: #171713; background: #fff; }

@@ -13,16 +13,51 @@ import Services from "./components/Services";
 import Journal from "./components/Journal";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import AdminPanel from "./components/AdminPanel";
 import { portfolioProfiles } from "./data/content.js";
+import { getSavedProjects, subscribeToProjects } from "./lib/projectStore.js";
+import "./admin.css";
 
 export default function App() {
+  const isAdminRoute = window.location.pathname.replace(/\/$/, "") === "/admin";
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasChosenProfile, setHasChosenProfile] = useState(false);
   const [isErfanProfile, setIsErfanProfile] = useState(false);
+  const [savedProjects, setSavedProjects] = useState(() => ({
+    erfan: getSavedProjects("erfan"),
+    matin: getSavedProjects("matin"),
+  }));
 
-  const profile = isErfanProfile
+  useEffect(
+    () =>
+      subscribeToProjects(() => {
+        setSavedProjects({
+          erfan: getSavedProjects("erfan"),
+          matin: getSavedProjects("matin"),
+        });
+      }),
+    [],
+  );
+
+  useEffect(() => {
+    if (isAdminRoute) return;
+    const activeProfile = isErfanProfile
+      ? portfolioProfiles.erfan
+      : portfolioProfiles.matin;
+    document.title = hasChosenProfile
+      ? activeProfile.metaTitle
+      : "Erfan Akrami × Matin Asghari — Portfolio";
+  }, [hasChosenProfile, isAdminRoute, isErfanProfile]);
+
+  if (isAdminRoute) return <AdminPanel />;
+
+  const baseProfile = isErfanProfile
     ? portfolioProfiles.erfan
     : portfolioProfiles.matin;
+  const profile = {
+    ...baseProfile,
+    projects: [...savedProjects[baseProfile.id], ...baseProfile.projects],
+  };
   const avatarSrc = isErfanProfile
     ? "/assets/hero.png"
     : "/assets/avatar.png";
@@ -30,12 +65,6 @@ export default function App() {
     ? "/assets/avatar.png"
     : "/assets/hero.png";
   const experienceReady = isLoaded && hasChosenProfile;
-
-  useEffect(() => {
-    document.title = hasChosenProfile
-      ? profile.metaTitle
-      : "Erfan Akrami × Matin Asghari — Portfolio";
-  }, [hasChosenProfile, profile.metaTitle]);
 
   const handleProfileChange = (profileId) => {
     setIsErfanProfile(profileId === "erfan");

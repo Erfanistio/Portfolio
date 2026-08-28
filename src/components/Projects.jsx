@@ -36,10 +36,10 @@ export default function Projects({ projects }) {
     >
       <div
         data-projects-grid
-        className="grid grid-cols-1 gap-5 md:grid-cols-2 max-sm:gap-2"
+        className="mx-auto grid w-full max-w-[min(100%,156vh)] grid-cols-1 gap-5 md:grid-cols-2 max-sm:gap-2"
       >
-        {projects.map((project) => (
-          <ProjectCard key={project.title} project={project} />
+        {projects.map((project, index) => (
+          <ProjectCard key={project.id ?? `${project.title}-${index}`} project={project} />
         ))}
       </div>
     </section>
