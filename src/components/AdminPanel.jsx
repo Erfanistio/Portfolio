@@ -12,7 +12,10 @@ import {
   UploadCloud,
 } from "lucide-react";
 import {
+  deleteBuiltInProject,
   deleteProject,
+  getBuiltInProjectId,
+  getHiddenBuiltInProjectIds,
   getSavedProjects,
   saveProject,
   subscribeToProjects,
@@ -276,19 +279,27 @@ function ProjectForm({ account }) {
 }
 
 function ProjectCard({ project, account, isBuiltIn }) {
+  const handleDelete = () => {
+    if (isBuiltIn) {
+      deleteBuiltInProject(account.profileId, project.id);
+      return;
+    }
+
+    deleteProject(account.profileId, project.id);
+  };
+
   return (
     <article className="group overflow-hidden rounded-[22px] bg-white shadow-[0_14px_40px_rgba(26,26,20,0.06)]">
       <div className="relative aspect-[1.25] overflow-hidden bg-black/5">
         <img src={project.image} alt={project.alt} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-        {isBuiltIn ? (
-          <span className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60 backdrop-blur-md">
+        {isBuiltIn && (
+          <span className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60 backdrop-blur-md">
             <LockKeyhole size={12} /> Built in
           </span>
-        ) : (
-          <button type="button" onClick={() => deleteProject(account.profileId, project.id)} aria-label={`Delete ${project.title}`} className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/65 text-white opacity-100 backdrop-blur-md transition hover:bg-[#d84328] sm:opacity-0 sm:group-hover:opacity-100 sm:focus-visible:opacity-100">
-            <Trash2 size={16} />
-          </button>
         )}
+        <button type="button" onClick={handleDelete} aria-label={`Delete ${project.title}`} className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/65 text-white opacity-100 backdrop-blur-md transition hover:bg-[#d84328] sm:opacity-0 sm:group-hover:opacity-100 sm:focus-visible:opacity-100">
+          <Trash2 size={16} />
+        </button>
       </div>
       <div className="p-4">
         <div className="flex items-center justify-between gap-3">
@@ -304,9 +315,9 @@ function ProjectCard({ project, account, isBuiltIn }) {
 function ProjectList({ customProjects, builtInProjects, account }) {
   const allProjects = [
     ...customProjects.map((project) => ({ ...project, isBuiltIn: false })),
-    ...builtInProjects.map((project, index) => ({
+    ...builtInProjects.map((project) => ({
       ...project,
-      id: `built-in-${account.profileId}-${index}`,
+      id: getBuiltInProjectId(project),
       isBuiltIn: true,
     })),
   ];
@@ -335,7 +346,12 @@ function ProjectList({ customProjects, builtInProjects, account }) {
 }
 function AdminDashboard({ account, onLogout }) {
   const [projects, setProjects] = useState(() => getSavedProjects(account.profileId));
-  const builtInProjects = portfolioProfiles[account.profileId]?.projects ?? [];
+  const hiddenBuiltInProjects = new Set(
+    getHiddenBuiltInProjectIds(account.profileId),
+  );
+  const builtInProjects = (portfolioProfiles[account.profileId]?.projects ?? []).filter(
+    (project) => !hiddenBuiltInProjects.has(getBuiltInProjectId(project)),
+  );
   const totalProjects = projects.length + builtInProjects.length;
 
   useEffect(

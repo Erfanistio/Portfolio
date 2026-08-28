@@ -15,7 +15,12 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import AdminPanel from "./components/AdminPanel";
 import { portfolioProfiles } from "./data/content.js";
-import { getSavedProjects, subscribeToProjects } from "./lib/projectStore.js";
+import {
+  getBuiltInProjectId,
+  getHiddenBuiltInProjectIds,
+  getSavedProjects,
+  subscribeToProjects,
+} from "./lib/projectStore.js";
 import "./admin.css";
 
 export default function App() {
@@ -54,9 +59,17 @@ export default function App() {
   const baseProfile = isErfanProfile
     ? portfolioProfiles.erfan
     : portfolioProfiles.matin;
+  const hiddenBuiltInProjects = new Set(
+    getHiddenBuiltInProjectIds(baseProfile.id),
+  );
   const profile = {
     ...baseProfile,
-    projects: [...savedProjects[baseProfile.id], ...baseProfile.projects],
+    projects: [
+      ...savedProjects[baseProfile.id],
+      ...baseProfile.projects.filter(
+        (project) => !hiddenBuiltInProjects.has(getBuiltInProjectId(project)),
+      ),
+    ],
   };
   const avatarSrc = isErfanProfile
     ? "/assets/hero.png"
