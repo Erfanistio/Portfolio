@@ -14,10 +14,10 @@ const matinProfile = {
     intro: "Hi, I'm a UI/UX Designer focused on creating intuitive, user-centered digital experiences. This website is a collection of my selected projects, showcasing my design process from idea to execution.",
   },
   projects: [
-    { category: 'CASE STUDY', title: 'INNERSPACE', image: '/assets/placeholder.png', alt: 'Innerspace project preview' },
-    { category: 'SIDE PROJECT', title: 'GOOK', image: '/assets/placeholder.png', alt: 'Gook project preview' },
-    { category: 'BRANDING', title: 'POLESTAR', image: '/assets/placeholder.png', alt: 'Polestar project preview' },
-    { category: 'CASE STUDY', title: 'NEXT PROJECT', image: '/assets/placeholder.png', alt: 'Next project preview' },
+    { category: 'CASESTUDY', title: 'INNERSPACE', image: '/assets/project-innerspace.png', alt: 'Innerspace UI case study project preview' },
+    { category: 'SIDE PROJECTS', title: 'GOOK', image: '/assets/project-gook.png', alt: 'Gook food-ordering app project preview' },
+    { category: 'SIDE PROJECTS', title: 'TIMER APP', image: '/assets/project-timer.png', alt: 'Timer app interface project preview' },
+    { category: 'SIDE PROJECTS', title: 'DANESHVARAN', image: '/assets/project-daneshvaran.png', alt: 'Daneshvaran education website project preview' },
   ],
   about: {
     label: 'ABOUT MATIN .26',
